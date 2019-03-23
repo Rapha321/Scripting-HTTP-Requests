@@ -11,17 +11,16 @@ module.exports = function getHTML (options, callback) {
     response.setEncoding('utf8');
 
     var buffer = '';
-
     // the callback is invoked when a `data` chunk is received
     response.on('data', function (data) {
       buffer += data;
-      console.log('Chunk data received: ', buffer)
     });
 
 
     // the callback is invoked when all of the data has been received
     // (the `end` of the stream)
     response.on('end', function() {
+      callback(buffer);
       console.log('Response stream complete.');
     });
 
